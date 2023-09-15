@@ -1,23 +1,24 @@
 const User = require("../models/userModel");
 const resolvers = {
   Query: {
-    users: async () => {
+    getAllUsers: async () => {
       try {
-        const users = await User.find();
+        const users = await User.find({})
+        console.log(users)
         return users;
       } catch (error) {
-        throw new Error("Failed to fetch users");
+        throw new Error("Failed to fetch User");
       }
     },
   },
   Mutation: {
-    createUser: async (parent, { name, email }) => {
+    addUser: async (parent, { name, email, password }) => {
       try {
-        const user = new User({ name, email });
-        await user.save();
+        const newUser = new User({ name, email, password });
+        const user = await newUser.save();
         return user;
       } catch (error) {
-        throw new Error("Failed to create user");
+        throw new Error("Failed to add user");
       }
     },
   },
