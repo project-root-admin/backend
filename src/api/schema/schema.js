@@ -2,6 +2,7 @@ const typeDefs = `
 type User {
   id: ID!
   name: String!
+  profileIconUrl: String
   email: String!
   password: String!
   tasks: [Task!]!
@@ -14,52 +15,98 @@ type Org {
   members: [User!]!
 }
 
-type Task {
-  id: ID!
-  title: String!
-  description: String
-  status: TaskStatus!
-  dueDate: String
-  assignedTo: User
-  createdBy: User!
-  createdAt: String!
-}
+
 
 enum TaskStatus {
   PENDING
   IN_PROGRESS
   COMPLETED
+  HOLD
+  CANCELLED
+}
+
+enum priorityEnum {
+  HIGHEST
+  URGENT
+  CRITICAL
+  NORMAL
+  LOWEST
+  MISSING
 }
 
 type Query {
-  getAllUsers: [User!]!
+  getAllUsers: [User]
+  getActiveTasks: [Task]
+  getPendingTasks: [Task]
   getUser(id: ID!): User
-  getOrgs: [Org!]!
+  getOrgs: [Org]
   getOrg(id:ID!) : Org
-  tasks: [Task!]!
+  getAllTasks: [Task]
+  getTask(id: ID!): Task
 }
 
 type Mutation {
-  addUser(name: String!, email: String!, password: String!): User!
-  createOrg(name: String!, email: String!): Org!
-  createTask(
-    title: String!
-    description: String
-    status: TaskStatus!
-    dueDate: String
-    assignedTo: ID
-    createdBy: ID!
-  ): Task!
-  updateTask(
-    id: ID!
-    title: String
-    description: String
-    status: TaskStatus
-    dueDate: String
-    assignedTo: ID
-  ): Task!
-  deleteTask(id: ID!): Task!
+  addUser(name: String!, email: String!, password: String!): User
+  createOrg(name: String!, email: String!): Org
+  createTask(input: TaskInput ): Task
+  updateTask(id: ID!, input: TaskInput  ): Task!
+  deleteTask(id: ID!): Task
 }
+
+input TaskInput {
+  taskID: String
+  title: String
+  description: String
+  assignedTo: [ID!]
+  status: TaskStatus
+  dueDate: String
+  assignedBy: ID
+  followedBy: [ID]
+  discussion: [DiscussionInput]
+  acceptanceCriteria: String
+  startDate: String
+  endDate: String
+  priority: [priorityEnum]
+  valueArea: [String]
+  logs: [String]
+  links: [String]
+  createdAt: String!
+}
+
+input DiscussionInput {
+  tags: [String]
+  info: [String]
+  taggedUser: [String]
+}
+
+type Discussion {
+  tags: [String]
+  info: [String]
+  taggedUser: [String]
+}
+type Task {
+  id: ID!
+  taskID: String!
+  title: String!
+  description: String
+  assignedTo: [ID!]
+  status: TaskStatus!
+  dueDate: String  
+  assignedBy: ID!
+  assignedByUser: User
+  followedBy: User
+  discussion: [Discussion]  
+  acceptanceCriteria: String
+  startDate: String
+  endDate: String
+  duration: String
+  priority: [priorityEnum]
+  valueArea: [String]
+  Logs: [String]
+  Links:[String]
+  createdAt: String!
+}
+
 `;
 
 module.exports = typeDefs;
