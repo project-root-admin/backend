@@ -59,10 +59,11 @@ const resolvers = {
     }
   },
   Mutation: {
-    addUser: async (parent, { name, email, password }) => {
+    addUser: async (parent, { input}) => {
       try {
-        const newUser = new User({ name, email, password });
+        const newUser = new User (input);
         const user = await newUser.save();
+        console.log('user bana')
         return user;
       } catch (error) {
         throw new Error("Failed to add user");

@@ -1,7 +1,8 @@
 const typeDefs = `
 type User {
   id: ID!
-  name: String!
+  firstname: String!
+  lastname: String!
   profileIconUrl: String
   email: String!
   password: String!
@@ -46,7 +47,7 @@ type Query {
 }
 
 type Mutation {
-  addUser(name: String!, email: String!, password: String!): User
+  addUser( input: UserInput): User
   createOrg(name: String!, email: String!): Org
   createTask(input: TaskInput ): Task
   updateTask(id: ID!, input: TaskInput  ): Task!
@@ -71,6 +72,13 @@ input TaskInput {
   logs: [String]
   links: [String]
   createdAt: String!
+}
+
+input UserInput {
+  firstname: String
+  lastname: String! 
+  email: String! 
+  password: String!
 }
 
 input DiscussionInput {
