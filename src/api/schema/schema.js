@@ -6,7 +6,9 @@ type User {
   profileIconUrl: String
   email: String!
   password: String!
-  tasks: [Task!]!
+  tasks: [Task]
+  roles: [String]
+  createdAt: String!
 }
 
 type Org {
@@ -52,6 +54,12 @@ type Mutation {
   createTask(input: TaskInput ): Task
   updateTask(id: ID!, input: TaskInput  ): Task!
   deleteTask(id: ID!): Task
+  login(email: String!, password: String!): AuthPayload!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
 }
 
 input TaskInput {
@@ -75,10 +83,12 @@ input TaskInput {
 }
 
 input UserInput {
-  firstname: String
+  firstname: String!
   lastname: String! 
   email: String! 
   password: String!
+  roles: [String]
+
 }
 
 input DiscussionInput {

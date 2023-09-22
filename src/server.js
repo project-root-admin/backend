@@ -8,12 +8,19 @@ const resolvers = require('./api/resolvers/userResolver');
 require('dotenv').config();
 const { connectToDatabase } = require('./config/database');
 
-
+// const {addAdditionalKeys} = require('./api/resolvers/addAdditionalKeys')
 // Connect to MongoDB
-connectToDatabase();
+const crypto = require('crypto');
 
+const generateJwtSecretKey = () => {
+  // Generate a random secret key
+  const secretKey = crypto.randomBytes(32).toString('hex');
+  return secretKey;
+};
 
 async function startServer() {
+await connectToDatabase();
+
    const app = express();
    
    // Create Apollo Server
@@ -23,6 +30,7 @@ async function startServer() {
    app.use(cors());
    await server.start()
    app.use("/graphql", expressMiddleware(server));
+   // await addAdditionalKeys()
    app.listen(port, () => { console.log(`Server ready at ${port}`); });
 
 }
