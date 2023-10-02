@@ -3,8 +3,11 @@ const { ApolloServer } = require('@apollo/server');
 const {expressMiddleware} = require('@apollo/server/express4')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const typeDefs = require('./api/schema/schema'); 
-const resolvers = require('./api/resolvers/userResolver'); 
+const typeDefs = require('./api/schema/types'); 
+const resolvers = require('./api/resolvers')
+
+// const typeDefs = require('../typedef')
+// const resolvers = require('./api/resolvers/userResolvere'); 
 require('dotenv').config();
 const { connectToDatabase } = require('./config/database');
 
@@ -22,8 +25,8 @@ async function startServer() {
 await connectToDatabase();
 
    const app = express();
-   
-   // Create Apollo Server
+
+  //  Create Apollo Server
    const server = new ApolloServer({ typeDefs, resolvers });
    const port = process.env.PORT || 5000;
    app.use(bodyParser.json());

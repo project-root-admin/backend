@@ -17,6 +17,7 @@ const taskSchema = new mongoose.Schema({
   },
   assignedTo: {
     type: [mongoose.Schema.Types.ObjectId],
+    ref: 'user',
     required: true,
   },
   status: {
@@ -29,12 +30,12 @@ const taskSchema = new mongoose.Schema({
   },
   assignedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
     required: true,
   },
   followedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
   },
   discussion: {
     type: [
@@ -67,14 +68,21 @@ const taskSchema = new mongoose.Schema({
   links: {
     type: [],
   },
-  createdAt: {
-    type: String,
+  org: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'org',
     required: true,
   },
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'project',
+    required: true,
+  },
+    createdAt: { type: Date, default: Date.now },
 },
 {
     collection: "tasks"
   }
 );
 
-module.exports = mongoose.model('Tasks', taskSchema);
+module.exports = mongoose.model('task', taskSchema);
