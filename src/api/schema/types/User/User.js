@@ -2,17 +2,38 @@
 const userTypeDefs = `
 type User {
   id: ID!
+  username: String
   firstname: String!
   lastname: String!
-  org: [Org]
-  project: [Project]
+  profilePicture: String
+  address: UserAddress
+  dateOfBirth: String
+  bio: String
+  permissions: [String]
+  type: UserType
+  organizations: [ID]
+  project: [ID]
   email: String!
-  password: String!
-  tasks: [Task]
+  tasks: [ID]
   roles: [String!]!
-  permissions: [String!]
-  createdAt: String!
+  createdAt: DateTime!
 }
+
+type UserAddress {
+  street: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+}
+
+
+type AuthResponse {
+  user: User
+  token: String
+}
+
+scalar DateTime
 `;
 
 module.exports = userTypeDefs;

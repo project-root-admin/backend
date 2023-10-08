@@ -3,15 +3,14 @@ const userQueryResolver = {
 Query: {
     
  
-    users: async () => {
-      try {
-        const users = await User.find({});
-        console.log(users);
-        return users;
-      } catch (error) {
-        throw new Error("Failed to fetch User");
-      }
-    },
+   getUser: async (root, {id}) => {
+    try {
+      const user = await User.findById(id);
+      return user;
+    } catch (error) {
+      throw new Error("Failed to fetch User");
+    }
+   }
 
 
   },

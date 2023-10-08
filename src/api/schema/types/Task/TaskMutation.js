@@ -1,12 +1,12 @@
-const userMutationTypeDefs = `
+const taskMutationTypeDefs = `
   extend type Mutation {
-  createTask(input: TaskInput ): Task
-  updateTask(id: ID!, input: TaskInput  ): Task!
+  createTask(input: CreateTaskInput ): Task
+  updateTask(id: ID!, input: UpdateTaskInput  ): Task!
   deleteTask(id: ID!): Task
   }
 `;
 
 
-module.exports = userMutationTypeDefs
+module.exports = taskMutationTypeDefs
 
 

@@ -2,7 +2,7 @@ const Tasks = require('../../models/taskModel')
 const taskQueryResolver = {
 Query: {
 
-  getTask: async (parent, { id }) => {
+  getTaskById: async (parent, { id }) => {
       try {
         const task = await Tasks.findById(id);
         return task;
@@ -19,23 +19,24 @@ Query: {
       }
     },
 
-    getActiveTasks: async () => {
+    getTasksByStatus: async (parent, { status }) => {
       try {
-        const tasks = await Tasks.find({ status: "IN_PROGRESS" });
+        const tasks = await Tasks.find({ status });
+        return tasks;
+      } catch (error) {
+        throw new Error("Failed to fetch tasks");
+      } 
+    },
+
+    getTasksByAssignedUser: async (parent, { userID }) => {
+      try {
+        const tasks = await Tasks.find({ assignedTo: userID });
         return tasks;
       } catch (error) {
         throw new Error("Failed to fetch tasks");
       }
     },
 
-    getPendingTasks: async () => {
-      try {
-        const tasks = await Tasks.find({ status: "PENDING" });
-        return tasks;
-      } catch (error) {
-        throw new Error("Failed to fetch tasks");
-      }
-    },
   },
 }
 

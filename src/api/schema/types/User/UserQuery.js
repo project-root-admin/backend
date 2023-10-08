@@ -1,7 +1,7 @@
 const userQueryTypeDefs = `
   extend type Query {
-    users: [User] @hasRole(roles: ["SUPERDUPERADMIN"])
-    user(id: ID!): User
+    getUsers: [User]
+    getUser(id: ID!): User
   }
 `;
 

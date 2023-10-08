@@ -1,9 +1,9 @@
 const User = require("../../models/userModel");
 const taskResolver = {
     Task: {
-    author: async (Task) => {
+    createdBy: async (Task) => {
       try {
-        const user = await User.findById(Task.assignedBy);
+        const user = await User.findById(Task.createdBy);
         return user;
       } catch (error) {
         throw new Error("Failed to fetch User");
