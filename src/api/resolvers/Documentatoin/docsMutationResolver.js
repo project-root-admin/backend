@@ -5,7 +5,7 @@ Mutation: {
     try {
 
       console.log(input)
-      const docs = new Documentation(input);
+      const docs = new Documentation({...input});
 
       await docs.save()
       console.log(docs)

@@ -11,8 +11,8 @@ type User {
   bio: String
   permissions: [String]
   type: UserType
-  organizations: [ID]
-  project: [ID]
+  organizations: [Org]
+  project: [Project]
   email: String!
   tasks: [ID]
   roles: [String!]!

@@ -1,6 +1,6 @@
 const docsQueryTypeDefs = `
 extend type Query {
-getDocumentation(itemId: ID!): Docs
+getDocumentation(itemId: String!): Docs
 getAllMutationQueryItems: [MutationQueryItem]
 }
 

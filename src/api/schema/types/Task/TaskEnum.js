@@ -7,7 +7,7 @@ enum TaskStatus {
   CANCELLED
 }
 
-enum Priority {
+enum TaskPriority {
   HIGHEST
   URGENT
   CRITICAL

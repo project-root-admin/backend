@@ -33,6 +33,6 @@ input TeamInput {
   members: [ID]
   description: String
 }
-  `
+`
 
-  module.exports = orgInputTypeDefs 
+module.exports = orgInputTypeDefs 

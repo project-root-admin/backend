@@ -1,6 +1,7 @@
 //Both Documentation and Mutationand Query types are defined here
 const docsTypeDefs =`
 type Docs {
+  id: ID
   title: String
   description: String
   args: [ArgsType]

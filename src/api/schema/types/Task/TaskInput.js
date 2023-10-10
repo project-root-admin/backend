@@ -3,20 +3,21 @@ input CreateTaskInput {
   taskID: String!
   title: String!
   description: String
-  assignedTo: [ID!]!
+  assignedTo: [ID]
   status: TaskStatus!
-  dueDate: String
+  dueDate: DateTime
   createdBy: ID
-  followedBy: [ID!]
-  discussion: [DiscussionInput]
+  followedBy: [ID]
+  discussion: [DiscussionInput] 
   taskType: TaskType
-  dependencies: [ID!]
+  dependencies: [ID]
   acceptanceCriteria: String
-  startDate: String
-  completedDate: String
+  startDate: DateTime
+  completedDate: DateTime
   estimatedTime: Int
+  timestampInfo: TimestampInfoInput
   trackedMinutes: Int
-  priority: Priority
+  priority: TaskPriority
   valueArea: [String]
   logs: [String]
   links: [String]
@@ -25,25 +26,28 @@ input CreateTaskInput {
 }
 
 input UpdateTaskInput {
-  title: String
+  taskID: String!
+  title: String!
   description: String
   assignedTo: [ID]
-  status: TaskStatus
-  dueDate: String
-  createdBy: ID
+  status: TaskStatus!
+  dueDate: DateTime 
   followedBy: [ID]
   discussion: [DiscussionInput]
   taskType: TaskType
   dependencies: [ID]
   acceptanceCriteria: String
-  startDate: String
-  completedDate: String
+  startDate: DateTime
+  completedDate: DateTime
   estimatedTime: Int
+  timestampInfo: TimestampInfoInput
   trackedMinutes: Int
-  priority: Priority
+  priority: TaskPriority
   valueArea: [String]
   logs: [String]
   links: [String]
+  org: ID!
+  project: ID!
 }
 
 input DiscussionInput {
@@ -51,6 +55,16 @@ input DiscussionInput {
   info: String
   taggedUser: [String]
 }
-  `
+
+input TimestampInfoInput {
+  startedAt: DateTime
+  pausedTimes: [PausedTimeInput]
+  completedAt: DateTime
+}
+
+input PausedTimeInput {
+  pausedAt: DateTime
+  resumedAt: DateTime
+}  `
 
   module.exports = taskInputTypeDefs 

@@ -60,7 +60,10 @@ const taskSchema = new mongoose.Schema({
   estimatedTime: Number,
   timestampInfo: {
     startedAt: Date,
-    pausedTimes: [Date],
+    pausedTimes: [{
+      pausedAt: Date,
+      resumedAt: Date
+    }],
     completedAt:  Date,
   },
 

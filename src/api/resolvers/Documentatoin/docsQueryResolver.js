@@ -3,9 +3,11 @@ const docsQueryResolver = {
 Query: {
   getDocumentation: async (parent, {itemId}, context) => {
     try {
-      const docs = await Documentation.findById({itemId});
-      return docs;
+      const Docs = await Documentation.find({itemId : itemId});
+      console.log(Docs)
+      return Docs;
     } catch (error) {
+      console.log("err->", error.message);
       throw new Error("Failed to fetch documentation");
     }
 
