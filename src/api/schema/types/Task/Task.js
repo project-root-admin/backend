@@ -1,33 +1,51 @@
 const taskTypeDefs =`
 type Task {
-    id: ID!
-    taskID: String!
-    title: String!
-    description: String
-    assignedTo: [ID!]
-    status: TaskStatus!
-    dueDate: String  
-    assignedBy: ID!
-    author: User
-    followedBy: User
-    discussion: [Discussion]  
-    acceptanceCriteria: String
-    startDate: String
-    endDate: String
-    duration: String
-    priority: [priorityEnum]
-    valueArea: [String]
-    Logs: [String]
-    Links:[String]
-    createdAt: String!
-  }
+  _id: ID!
+  taskID: String!
+  title: String!
+  description: String
+  assignedTo: [User]
+  status: TaskStatus!
+  dueDate: String
+  createdBy: User
+  followedBy: [User]
+  discussion: [Discussion]
+  taskType: TaskType
+  dependencies: [Task]
+  acceptanceCriteria: String
+  startDate: String
+  completedDate: String
+  estimatedTime: Int
+  timestampInfo: TimestampInfo
+  trackedMinutes: Int
+  priority: TaskPriority
+  valueArea: [String]
+  logs: [String]
+  links: [String]
+  org: Org!
+  project: Project!
+  createdAt: String
+}
 
-  type Discussion {
-    tags: [String]
-    info: [String]
-    taggedUser: [String]
-  }
+type Discussion {
+  tags: [String]
+  info: String
+  taggedUser: [String]
+}
+
+type TimestampInfo {
+  startedAt: String
+  pausedTimes: [PausedTime]
+  completedAt: String
+}
+
+type PausedTime {
+  pausedAt: String
+  resumedAt: String
+}
+
+  scalar DateTime
   
   `
 
-  module.exports = taskTypeDefs;
+module.exports = taskTypeDefs;

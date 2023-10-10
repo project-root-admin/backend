@@ -1,9 +1,9 @@
 const taskQueryTypeDefs = `
   extend type Query {
-    getActiveTasks: [Task]
-    getPendingTasks: [Task]
+    getTaskById(id: ID!): Task
     getAllTasks: [Task]
-    getTask(id: ID!): Task
+    getTasksByStatus(status: String!): [Task]
+    getTasksByAssignedUser(userID: ID!): [Task]
   }
 `;
 

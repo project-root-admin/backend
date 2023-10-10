@@ -2,16 +2,33 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
-    id: { type: mongoose.Schema.Types.ObjectId },
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
-    org: {
+    username: { type: String, unique: true }, 
+    firstname: String,
+    lastname: String,
+    profilePicture: String,
+    phoneNumber: String,
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      country: String,
+    },
+    dateOfBirth: Date,
+    bio: String,
+    permissions: [String],
+    type: {
+      type: String,
+      enum: ['ADMIN', 'EMPLOYEE', 'GUEST'],
+      required: true,
+    },
+    organizations: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "org",
+      ref: "orgs",
     },
     project:{
      type: [mongoose.Schema.Types.ObjectId],
-     ref: "project",
+     ref: "projects",
     },
     email: {
       type: String,
@@ -19,7 +36,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: {
         validator: function (value) {
-          // Use a regular expression to validate the email format
+          // regex to validate the email format
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
         },
         message: "Invalid email format",
@@ -36,11 +53,7 @@ const userSchema = new mongoose.Schema(
         message: "Password must be at least 6 characters long",
       },
     },
-    tasks: { type: Array, default: [] },
-    roles: [{ type: String, 
-      enum: ['ADMIN', 'GUEST', 'USER'],
-      default: ["user"] }],
-    permissions: [{ type: String }],
+    tasks: { type: [mongoose.Schema.Types.ObjectId], ref: "tasks", default: [] },
     createdAt: { type: Date, default: Date.now },
   },
   {

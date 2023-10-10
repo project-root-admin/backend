@@ -1,9 +1,9 @@
 const userMutationTypeDefs = `
   extend type Mutation {
-    addUser(input: UserInput!): User
-    updateUser(id: ID!, input: UserInput!): User
+    addUser(input: CreateUserInput!): AuthResponse
+    updateUser(id: ID!, input: UpdateUserInput!): User
     deleteUser(id: ID!): User
-    loginUser(email: String!, password: String!): String
+    loginUser(email: String!, password: String!): AuthResponse
   }
 `;
 

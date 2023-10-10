@@ -1,4 +1,4 @@
-const TaskEnumTypeDefs = `
+const taskEnumTypeDefs = `
 enum TaskStatus {
   PENDING
   IN_PROGRESS
@@ -6,7 +6,8 @@ enum TaskStatus {
   HOLD
   CANCELLED
 }
-enum priorityEnum {
+
+enum TaskPriority {
   HIGHEST
   URGENT
   CRITICAL
@@ -14,6 +15,15 @@ enum priorityEnum {
   LOWEST
   MISSING
 }
+
+enum TaskType {
+  FEATURE
+  BUG
+  QA
+  UI_DESIGN
+  PR
+  OTHER
+}
 `;
 
-module.exports = TaskEnumTypeDefs;
+module.exports = taskEnumTypeDefs;

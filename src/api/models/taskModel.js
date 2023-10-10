@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
   taskID: {
     type: String,
     required: true,
@@ -17,7 +14,7 @@ const taskSchema = new mongoose.Schema({
   },
   assignedTo: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: 'user',
+    ref: 'users',
     required: true,
   },
   status: {
@@ -28,35 +25,54 @@ const taskSchema = new mongoose.Schema({
   dueDate: {
     type: String,
   },
-  assignedBy: {
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true,
+    ref: 'users',
   },
   followedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'users',
   },
   discussion: {
     type: [
       {
         tags: [String],
-        info: [String],
+        info: String,
         taggedUser: [String],
       },
     ],
   },
+  taskType: {
+    type: String,
+    enum: ['FEATURE', 'BUG', 'QA', 'UI DESIGN', 'PR', 'OTHER'], // Define your task types here
+  },
+  dependencies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'tasks',
+    },
+  ],
   acceptanceCriteria: {
     type: String,
   },
-  startDate: {
-    type: String,
+  startDate: Date,
+  completedDate: Date,
+  estimatedTime: Number,
+  timestampInfo: {
+    startedAt: Date,
+    pausedTimes: [{
+      pausedAt: Date,
+      resumedAt: Date
+    }],
+    completedAt:  Date,
   },
-  endDate: {
-    type: String,
+
+  trackedMinutes: {
+    type: Number,
+    default: 0,
   },
   priority: {
-    type: [String],
+    type: String,
     enum: ['HIGHEST', 'URGENT', 'CRITICAL', 'NORMAL', 'LOWEST', 'MISSING'],
   },
   valueArea: {
@@ -70,15 +86,16 @@ const taskSchema = new mongoose.Schema({
   },
   org: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'org',
+    ref: 'orgs',
     required: true,
   },
   project: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'project',
+    ref: 'projects',
     required: true,
   },
     createdAt: { type: Date, default: Date.now },
+
 },
 {
     collection: "tasks"

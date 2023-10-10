@@ -2,16 +2,56 @@ const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema(
   {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    name: {
+       name: {
       type: String,
       required: true,
     },
+    description: String,
+    startDate: Date,
+    endDate: Date,
+    status: String,
+    priority: String,
+    tags: [String],
+
+    teamMembers: [
+     
+      {
+        name: String,
+        members:
+          {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'users',
+          },
+        
+        description: String,
+      },
+    ],
+
+    milestones: [
+      {
+        name: String,
+        description: String,
+        dueDate: Date,
+      },
+    ],
+
+    attachments: [
+      {
+        name: String,
+        fileUrl: String,
+        uploadedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'users',
+        },
+      },
+    ],
+    budget: Number,
+    progress: Number,
+    notes: String,
+
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
+      ref: 'users',
       required: true,
     },
     createdAt: { type: Date, default: Date.now },
@@ -19,21 +59,6 @@ const projectSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'org',
       required: true,
-    },
-    members: {
-      type: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-      }],
-      required: true,
-      validate: {
-        validator: async function (members) {
-          const org = await mongoose.model('org').findById(this.orgId);
-          const orgMembers = org.members.map(member => member.toString());
-          return members.every(member => orgMembers.includes(member.toString()));
-        },
-        message: 'Invalid members for the project',
-      },
     },
   },
   {
