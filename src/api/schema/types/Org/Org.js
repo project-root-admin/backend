@@ -1,7 +1,7 @@
 const orgTypeDefs =`
 type Org {
   id: ID
-  orgId: String!
+  orgId: String
   name: String!
   website: String
   industry: String
@@ -9,7 +9,7 @@ type Org {
   tags: [String]
   createdBy: User!
   members: [OrgMember]
-  projects: [Project!]!
+  projects: [Project]
   projectsCompleted: Int
   createdAt: String
   teams: [Team]

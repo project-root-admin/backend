@@ -15,7 +15,6 @@ const taskSchema = new mongoose.Schema({
   assignedTo: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'users',
-    required: true,
   },
   status: {
     type: String,
@@ -28,6 +27,7 @@ const taskSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
+    required: true,
   },
   followedBy: {
     type: [mongoose.Schema.Types.ObjectId],
@@ -87,12 +87,10 @@ const taskSchema = new mongoose.Schema({
   org: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'orgs',
-    required: true,
   },
   project: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'projects',
-    required: true,
   },
     createdAt: { type: Date, default: Date.now },
 

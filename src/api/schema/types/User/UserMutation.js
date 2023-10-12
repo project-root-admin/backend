@@ -3,7 +3,7 @@ const userMutationTypeDefs = `
     addUser(input: CreateUserInput!): AuthResponse
     updateUser(id: ID!, input: UpdateUserInput!): User
     deleteUser(id: ID!): User
-    loginUser(email: String!, password: String!): AuthResponse
+    login(email: String!, password: String!): AuthResponse
   }
 `;
 

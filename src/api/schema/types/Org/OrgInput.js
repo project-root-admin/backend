@@ -1,6 +1,6 @@
 const orgInputTypeDefs = `
 input OrgInput {
-  orgId: String!
+  orgId: String
   name: String!
   website: String
   industry: String
@@ -8,7 +8,7 @@ input OrgInput {
   tags: [String]
   createdBy: ID!
   members: [OrgMemberInput]
-  projects: [ID!]!
+  projects: [ID]
   projectsCompleted: Int
   teams: [TeamInput]
   clientList: [String]

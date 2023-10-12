@@ -16,7 +16,7 @@ type Project {
   notes: String
   createdBy: User!
   createdAt: String
-  orgId: ID!
+  org: Org
 }
 
 type TeamMember {

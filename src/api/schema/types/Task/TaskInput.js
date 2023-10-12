@@ -1,12 +1,12 @@
 const taskInputTypeDefs = `
 input CreateTaskInput {
-  taskID: String!
+  taskID: String
   title: String!
   description: String
   assignedTo: [ID]
-  status: TaskStatus!
+  status: TaskStatus
   dueDate: DateTime
-  createdBy: ID
+  createdBy: ID!
   followedBy: [ID]
   discussion: [DiscussionInput] 
   taskType: TaskType
@@ -21,8 +21,8 @@ input CreateTaskInput {
   valueArea: [String]
   logs: [String]
   links: [String]
-  org: ID!
-  project: ID!
+  org: ID
+  project: ID
 }
 
 input UpdateTaskInput {

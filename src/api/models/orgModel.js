@@ -2,13 +2,8 @@ const mongoose = require("mongoose");
 
 const orgSchema = new mongoose.Schema(
   {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
     orgId: {
         type: String,
-        required: true,
-        unique: true
     },
     name: {
       type: String,
@@ -35,9 +30,6 @@ const orgSchema = new mongoose.Schema(
         user: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'users',
-          default: function() {
-            return [this.createdBy];
-          },
         },
         role: {
           type: String,
@@ -52,7 +44,6 @@ const orgSchema = new mongoose.Schema(
     projects: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'project',
-        required: true
     },
     projectsCompleted: Number,
 

@@ -14,7 +14,7 @@ input ProjectInput {
   progress: Float
   notes: String
   createdBy: ID!
-  orgId: ID!
+  org: ID!
 }
 
 input TeamMemberInput {

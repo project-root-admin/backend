@@ -4,7 +4,7 @@ enum Role {
   GUEST
   TEAM_LEAD
   PROJECT_MANAGER
-  TEAM_MEMBER
+  TEAM_MEMBER 
 }
 
 enum Status {

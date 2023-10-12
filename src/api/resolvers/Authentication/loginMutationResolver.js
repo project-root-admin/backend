@@ -5,7 +5,7 @@
    // Login a user
 
    const loginMutation = {
-
+Mutation : {
     login: async (parent, { email, password }, context) => {
       console.log('parent', parent)
       console.log('context', context)
@@ -32,5 +32,6 @@
     },
 
     }
+  }
 
     module.exports = loginMutation

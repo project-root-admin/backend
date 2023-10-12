@@ -55,11 +55,16 @@ const projectSchema = mongoose.Schema(
       required: true,
     },
     createdAt: { type: Date, default: Date.now },
-    orgId: {
+    org: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'org',
       required: true,
     },
+    tasks: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'tasks',
+    }
+
   },
   {
     collection: 'projects',
